@@ -7,9 +7,13 @@ using namespace std;
 class Gradebook
 {
 public:
-    const static int students = 10;
-    const static int tests = 3;
-    Gradebook( string, const int [][ tests ] );
+    const static int maxStudents = 100;
+    const static int maxTests = 10;
+    Gradebook( string, int , int  );
+    void setStudents( int students );
+    void setTests( int tests );
+    int getStudents();
+    int getTests();
     void setCourseName( string name );
     string getCourseName();
     void displayMessage();
@@ -20,7 +24,9 @@ public:
     void outputBarChart();
     void outputGrades();
 private:
-    int grades[ students ][  tests ];
+    int students;
+    int tests;
+    int grades[ maxStudents ][ maxTests ];
     string courseName;
 };
 #endif // GRADEBOOK_H

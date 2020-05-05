@@ -7,12 +7,36 @@ using std::fixed;
 using std::setprecision;
 using std::setw;
 #include"gradebook.h"
-Gradebook::Gradebook( string name, const int gradesArray[][ tests ] )
+void Gradebook::setStudents( int student )
 {
+    students = student;
+}
+void Gradebook::setTests( int test )
+{
+    tests = test;
+}
+int Gradebook::getStudents()
+{
+    return students;
+}
+int Gradebook::getTests()
+{
+    return  tests;
+}
+Gradebook::Gradebook( string name, int student, int test)
+{
+    setStudents(student);
+    setTests(test);
     setCourseName( name );
     for ( int student = 0; student < students; student++ )
+    {
+        cout << "Student " << student + 1 << "\n\n";
         for ( int test = 0; test < tests; test++ )
-          grades[ student ][ test ] = gradesArray[ student ][ test ];
+        {
+            cout << "Test " << test + 1 << " : ";
+            cin >> grades[ student ][ test ];
+        }
+    }
 }
 void Gradebook::setCourseName( string name )
 {
@@ -95,14 +119,18 @@ void Gradebook::outputBarChart()
 void Gradebook::outputGrades()
 {
     cout << "\nThe grades are:\n\n";
-    cout << "Average" << endl;
+    cout << "Average:\n\n";
+    cout << "Student";
+         for ( int test = 0; test < Gradebook::tests; test++)
+               cout << setw( 7 ) << "Test " << test + 1;
+         cout << setw( 10 ) << "Average" << endl;
     for ( int student = 0; student < students; student++ )
     {
-        cout << "Student " << setw( 2 ) << student + 1;
+        cout << setw( 4 ) << student + 1;
          for ( int test = 0; test < tests; test++ )
              cout << setw( 8 ) << grades[ student ][ test ];
          double average = getAverage( grades[ student ], tests );
-         cout << setw( 9 ) << setprecision( 2 )
+         cout << setw( 12 ) << setprecision( 2 )
               << fixed << average << endl;
     }
 }
